@@ -43,11 +43,17 @@ public void OnMapStart()
 
 public void OnThinkPost(int entity)
 {
-	int offset = FindSendPropInfo("CCSPlayerResource", "m_iCompTeammateColor");
+	static int offset = -1;
 	
 	if (!loaded_player_colours)
 	{
-		GetEntDataArray(entity, offset, player_colours, MAXPLAYERS + 1);
+		offset = FindSendPropInfo("CCSPlayerResource", "m_iCompTeammateColor");
+		
+		if (offset > 0)
+		{
+			GetEntDataArray(entity, offset, player_colours, MAXPLAYERS + 1);
+		}
+		
 		loaded_player_colours = true;
 	}
 	
